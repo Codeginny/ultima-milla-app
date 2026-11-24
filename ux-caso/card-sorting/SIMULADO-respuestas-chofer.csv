@@ -1,0 +1,145 @@
+participante,tarjeta,grupo
+C01,2,Hoy
+C01,3,Hoy
+C01,4,Hoy
+C01,5,Hoy
+C01,6,Hoy
+C01,8,Parada
+C01,9,Parada
+C01,10,Parada
+C01,1,Parada
+C01,11,Entregas
+C01,12,Entregas
+C01,7,Entregas
+C01,13,Resumen
+C01,14,Resumen
+C01,15,Resumen
+C01,16,Resumen
+C01,17,Perfil
+C01,18,Perfil
+C02,1,Ruta
+C02,2,Ruta
+C02,3,Ruta
+C02,4,Ruta
+C02,5,Ruta
+C02,6,Ruta
+C02,7,Parada
+C02,8,Parada
+C02,10,Parada
+C02,11,Entregas
+C02,12,Entregas
+C02,9,Entregas
+C02,13,Mi día
+C02,14,Mi día
+C02,15,Mi día
+C02,16,Mi día
+C02,17,Ajustes
+C02,18,Ajustes
+C03,1,Ruta
+C03,2,Ruta
+C03,3,Ruta
+C03,4,Ruta
+C03,5,Ruta
+C03,6,Parada
+C03,7,Parada
+C03,8,Parada
+C03,9,Parada
+C03,10,Parada
+C03,12,Parada
+C03,11,Parada
+C03,13,Resumen
+C03,14,Resumen
+C03,15,Resumen
+C03,16,Resumen
+C03,17,Cuenta
+C03,18,Cuenta
+C04,1,Mi ruta
+C04,2,Mi ruta
+C04,3,Mi ruta
+C04,4,Mi ruta
+C04,5,Mi ruta
+C04,6,Mi ruta
+C04,7,Parada
+C04,8,Parada
+C04,9,Parada
+C04,10,Parada
+C04,11,Entregas
+C04,12,Entregas
+C04,13,Resumen
+C04,14,Resumen
+C04,15,Resumen
+C04,16,Resumen
+C04,17,Cuenta
+C04,18,Cuenta
+C05,2,Mi ruta
+C05,3,Mi ruta
+C05,4,Mi ruta
+C05,5,Mi ruta
+C05,6,Parada
+C05,7,Parada
+C05,8,Parada
+C05,10,Parada
+C05,1,Parada
+C05,11,Entregar
+C05,12,Entregar
+C05,9,Entregar
+C05,13,Resumen
+C05,14,Resumen
+C05,15,Resumen
+C05,16,Resumen
+C05,17,Perfil
+C05,18,Perfil
+C06,2,Mi ruta
+C06,3,Mi ruta
+C06,4,Mi ruta
+C06,5,Mi ruta
+C06,6,Pedido
+C06,7,Pedido
+C06,8,Pedido
+C06,9,Pedido
+C06,10,Pedido
+C06,1,Pedido
+C06,12,Pedido
+C06,11,Entregar
+C06,13,Estadísticas
+C06,14,Estadísticas
+C06,15,Estadísticas
+C06,16,Estadísticas
+C06,17,Perfil
+C06,18,Perfil
+C07,1,Ruta
+C07,2,Ruta
+C07,3,Ruta
+C07,4,Ruta
+C07,5,Ruta
+C07,6,Ruta
+C07,8,Pedido
+C07,10,Pedido
+C07,11,Pedido
+C07,12,Pedido
+C07,7,Pedido
+C07,9,Pedido
+C07,13,Resumen
+C07,14,Resumen
+C07,15,Resumen
+C07,16,Resumen
+C07,17,Perfil
+C07,18,Perfil
+C08,2,Ruta
+C08,3,Ruta
+C08,4,Ruta
+C08,5,Ruta
+C08,6,Cliente
+C08,7,Cliente
+C08,8,Cliente
+C08,9,Cliente
+C08,10,Cliente
+C08,1,Cliente
+C08,11,Cliente
+C08,12,Cliente
+C08,13,Mi día
+C08,14,Mi día
+C08,15,Mi día
+C08,16,Mi día
+C08,17,Cuenta
+C08,18,Cuenta
