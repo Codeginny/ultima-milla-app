@@ -1,0 +1,26 @@
+Issue Type,Summary,Epic Name,Parent,Sprint,Description,Story Points
+Epic,Research,Research,,,"Entrevistas a choferes y comercios, journeys",
+Epic,Diseño,Diseño,,,"Auditoría, arquitectura y rediseño en Figma",
+Epic,Implementación,Implementación,,,"Rediseño en el código, web y APK",
+Epic,Datos,Datos,,,"Card sorting, tests y dashboard de la jornada",
+Epic,Publicación,Publicación,,,"Fichas del portfolio, README y video",
+Story,Formularios para choferes y comercios,,Research,Sprint 1,Criterio de aceptación: Dos Google Forms creados y compartidos,1
+Story,Respuestas de 3+ choferes y 3+ comercios,,Research,Sprint 1,Criterio de aceptación: Respuestas exportadas en investigacion/respuestas,5
+Story,Journeys de chofer y comercio,,Research,Sprint 1,Criterio de aceptación: Validados con las respuestas y pasados a Figma,3
+Story,Proto-personas,,Research,Sprint 1,"Criterio de aceptación: Una por rol, basadas en respuestas reales",2
+Story,Pantallas reales en Figma (página 1),,Diseño,Sprint 1,Criterio de aceptación: Las 13 pantallas en claro y oscuro,2
+Story,Auditoría heurística,,Diseño,Sprint 2,Criterio de aceptación: Hallazgos con gravedad y captura marcada,5
+Story,Card sorting por rol,,Diseño,Sprint 2,Criterio de aceptación: 8+ respuestas,3
+Story,Nuevo mapa de navegación,,Diseño,Sprint 3,Criterio de aceptación: Justificado con el card sorting,2
+Story,Wireframes de las tareas clave,,Diseño,Sprint 3,"Criterio de aceptación: Próxima entrega, confirmar, no se pudo, seguir mi pedido",3
+Story,Design system en Figma,,Diseño,Sprint 3,"Criterio de aceptación: Variables claro/oscuro, tipografía y componentes",5
+Story,Prototipo de alta fidelidad,,Diseño,Sprint 3,Criterio de aceptación: Prototipo clickeable de las tareas clave,5
+Story,Implementar el rediseño,,Implementación,Sprint 3,"Criterio de aceptación: PR con lint y tsc en verde, capturas antes/después",8
+Story,Versión web en Vercel,,Implementación,Sprint 4,Criterio de aceptación: Link público,2
+Story,APK con EAS Build,,Implementación,Sprint 4,Criterio de aceptación: Link de descarga en el README,1
+Story,Test «antes» en Maze,,Datos,Sprint 2,"Criterio de aceptación: Éxito, tiempo, clics y SUS",3
+Story,Análisis del card sorting en Python,,Datos,Sprint 2,Criterio de aceptación: Matriz y dendrograma,3
+Story,Dashboard de la jornada,,Datos,Sprint 4,"Criterio de aceptación: Entregas, puntualidad y motivos de no entrega",5
+Story,Test «después» y comparación,,Datos,Sprint 4,Criterio de aceptación: Mismas tareas y métricas que el «antes»,3
+Story,Escribir las 5 fichas,,Publicación,Sprint 4,"Criterio de aceptación: Producto, Diseño, Full-Stack, Datos y Gestión enlazadas",8
+Story,Video en el celular,,Publicación,Sprint 4,Criterio de aceptación: 60–90 s de las tareas clave,1
