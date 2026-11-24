@@ -88,16 +88,7 @@ export default function MiPedido() {
       </Tarjeta>
 
       {estado === 'pendiente' && (
-        <MapaRuta
-          marcadores={[{ id: parada.id, coordenadas: parada.coordenadas, etiqueta: '', tipo: 'destino', nombre: 'Tu dirección' }]}
-          trazos={trazos}
-          camion={camion}
-          etiqueta="Mapa con el camión y tu dirección"
-        />
-      )}
-
-      {estado === 'pendiente' && (
-        <Seccion titulo={`Aviso ${MINUTOS_AVISO} minutos antes`} descripcion="Te mandamos una notificación cuando el camión esté cerca.">
+        <Seccion titulo={`Aviso ${MINUTOS_AVISO} minutos antes`} descripcion="Viene activado: te avisamos cuando el camión esté cerca. Lo podés quitar cuando quieras.">
           {aviso.resultado && aviso.resultado !== 'programado' && (
             <Notificacion tipo={aviso.resultado === 'sin-permiso' ? 'error' : 'info'} titulo="Sobre el aviso" mensaje={mensajesAviso[aviso.resultado]} />
           )}
@@ -110,6 +101,15 @@ export default function MiPedido() {
             <Boton texto={`Avisarme ${MINUTOS_AVISO} minutos antes`} icono="notifications-outline" cargando={aviso.programando} onPress={aviso.activar} />
           )}
         </Seccion>
+      )}
+
+      {estado === 'pendiente' && (
+        <MapaRuta
+          marcadores={[{ id: parada.id, coordenadas: parada.coordenadas, etiqueta: '', tipo: 'destino', nombre: 'Tu dirección' }]}
+          trazos={trazos}
+          camion={camion}
+          etiqueta="Mapa con el camión y tu dirección"
+        />
       )}
 
       <Seccion titulo="Tu pedido" descripcion={`${parada.pedido.bultos} bultos · ${parada.direccion}`}>

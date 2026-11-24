@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { guardarPreferencia, leerPreferencia } from '@/db/preferencias';
 import { cancelarAviso, programarAviso, ResultadoAviso } from '@/servicios/avisos';
@@ -17,9 +17,14 @@ export function useAvisoLlegada(codigo: string, llegada: Date | null, pendiente:
   const [guardado, setGuardado] = useState<Guardado | null>(null);
   const [resultado, setResultado] = useState<ResultadoAviso | null>(null);
   const [programando, setProgramando] = useState(false);
+  // Sin preferencia guardada (nunca lo activó ni lo quitó), el aviso se activa solo una vez.
+  const autoActivar = useRef(false);
+  const [leido, setLeido] = useState(false);
 
   useEffect(() => {
     leerPreferencia(CLAVE).then((texto) => {
+      autoActivar.current = texto === null;
+      setLeido(true);
       try {
         const g: Guardado | null = texto ? JSON.parse(texto) : null;
         if (g?.codigo === codigo) setGuardado(g);
@@ -48,6 +53,12 @@ export function useAvisoLlegada(codigo: string, llegada: Date | null, pendiente:
     setResultado(null);
     guardar(null);
   }, [guardado, guardar]);
+
+  useEffect(() => {
+    if (!leido || !autoActivar.current || !pendiente || !llegada) return;
+    autoActivar.current = false;
+    activar();
+  }, [leido, pendiente, llegada, activar]);
 
   // Reprograma si cambió la estimación; lo cancela si el pedido ya se resolvió.
   const llegadaMs = llegada?.getTime() ?? null;
