@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
+import { Boton } from '@/componentes/Boton/Boton';
 import { CampoTexto } from '@/componentes/CampoTexto/CampoTexto';
 import { EsqueletoLista } from '@/componentes/Esqueleto/Esqueleto';
 import { EstadoVacio, ErrorReintentar } from '@/componentes/Estados/Estados';
@@ -14,7 +15,8 @@ import { Progreso } from '@/componentes/Progreso/Progreso';
 import { Tarjeta } from '@/componentes/Tarjeta/Tarjeta';
 import { Texto } from '@/componentes/Texto/Texto';
 import { useRuta } from '@/hooks/useRuta';
-import { faltaTexto, filtrarParadas, minutosHasta, progreso } from '@/utils/ruta';
+import { comoLlegar } from '@/servicios/navegar';
+import { faltaTexto, filtrarParadas, horaCorta, minutosHasta, progreso } from '@/utils/ruta';
 
 // Ruta del día del chofer: avance, mapa con las paradas en orden y la lista para marcar entregas.
 export default function MiRuta() {
@@ -55,11 +57,24 @@ export default function MiRuta() {
       </Tarjeta>
 
       {siguiente ? (
-        <Notificacion
-          tipo="aviso"
-          titulo={`Próxima: ${siguiente.parada.cliente.nombre}`}
-          mensaje={`${siguiente.parada.direccion} · llegada ${faltaTexto(minutosHasta(siguiente.llegada, ahora))}`}
-        />
+        <Tarjeta destacada>
+          <View>
+            <Texto variante="etiqueta">Próxima entrega · parada {siguiente.parada.orden}</Texto>
+            <Texto variante="subtitulo">{siguiente.parada.cliente.nombre}</Texto>
+            <Texto variante="chico">
+              {siguiente.parada.direccion} · llegás {horaCorta(siguiente.llegada)} ({faltaTexto(minutosHasta(siguiente.llegada, ahora))}) · recibe de{' '}
+              {siguiente.parada.ventana.desde} a {siguiente.parada.ventana.hasta}
+            </Texto>
+          </View>
+          <View style={{ flexDirection: 'row', gap: 8 }}>
+            <View style={{ flex: 1 }}>
+              <Boton texto="Ir" variante="secundario" icono="navigate-outline" onPress={() => comoLlegar(siguiente.parada.coordenadas)} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Boton texto="Entregar" variante="acento" icono="create-outline" onPress={() => router.push({ pathname: '/chofer/confirmar/[id]', params: { id: siguiente.parada.id } })} />
+            </View>
+          </View>
+        </Tarjeta>
       ) : (
         <Notificacion tipo="exito" titulo="Ruta terminada" mensaje="Ya resolviste todas las paradas de hoy. Podés volver al depósito." />
       )}

@@ -77,6 +77,8 @@ export type Entrega = {
   // Cuándo la marcó el chofer (ISO).
   hora: string;
   motivo?: MotivoNoEntrega;
+  // Foto opcional que saca el chofer cuando no pudo entregar (persiana, local cerrado).
+  foto?: string;
   // Comprobante de la entrega: quién la recibió y si firmó en el teléfono del chofer.
   receptor?: string;
   firmada?: boolean;

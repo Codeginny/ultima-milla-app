@@ -1,31 +1,28 @@
 import { router, Stack, useLocalSearchParams } from 'expo-router';
-import { ReactNode, useState } from 'react';
-import { Linking, View } from 'react-native';
+import { ReactNode } from 'react';
+import { Linking, Pressable, View } from 'react-native';
 
 import { Boton } from '@/componentes/Boton/Boton';
-import { GrupoBotones } from '@/componentes/Boton/GrupoBotones';
-import { Dialogo } from '@/componentes/Dialogo/Dialogo';
 import { EsqueletoLista } from '@/componentes/Esqueleto/Esqueleto';
 import { EstadoVacio, ErrorReintentar } from '@/componentes/Estados/Estados';
-import { Icono } from '@/componentes/Icono/Icono';
+import { Icono, NombreIcono } from '@/componentes/Icono/Icono';
 import { MapaRuta } from '@/componentes/MapaRuta/MapaRuta';
 import { Notificacion } from '@/componentes/Notificacion/Notificacion';
 import { Pantalla, Seccion } from '@/componentes/Pantalla/Pantalla';
 import { Tarjeta } from '@/componentes/Tarjeta/Tarjeta';
 import { Texto } from '@/componentes/Texto/Texto';
-import { useHaptica } from '@/hooks/useHaptica';
 import { useRuta } from '@/hooks/useRuta';
 import { compartir, mensajeAlCliente } from '@/servicios/compartir';
-import { MotivoNoEntrega } from '@/tipos';
-import { motivos, textoMotivo } from '@/utils/motivos';
+import { comoLlegar } from '@/servicios/navegar';
+import { useTema } from '@/tema';
+import { textoMotivo } from '@/utils/motivos';
 import { dentroDeVentana, faltaTexto, horaCorta, minutosHasta, paradasAntes } from '@/utils/ruta';
 
-// Detalle de una entrega: quién recibe, qué lleva y los botones para resolverla.
+// Detalle de una entrega: las acciones en el orden del recorrido (llegar, avisar, llamar),
+// quién recibe, qué lleva y, fijos abajo, los botones para resolverla.
 export default function DetalleParada() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { datos: ruta, error, cargando, recargar, estimadas, camion, ahora, jornada } = useRuta();
-  const haptica = useHaptica();
-  const [preguntarMotivo, setPreguntarMotivo] = useState(false);
 
   if (cargando || !ruta) {
     return <Pantalla>{error ? <ErrorReintentar error={error} onReintentar={recargar} /> : <EsqueletoLista variante="aviso" cantidad={2} />}</Pantalla>;
@@ -48,20 +45,18 @@ export default function DetalleParada() {
 
   const entregar = () => router.push({ pathname: '/chofer/confirmar/[id]', params: { id: parada.id } });
 
-  const noEntregar = (motivo: MotivoNoEntrega) => {
-    jornada.marcarNoEntregada(parada.id, motivo);
-    setPreguntarMotivo(false);
-    haptica.error();
-    router.back();
-  };
-
-  const comoLlegar = () => {
-    const { latitud, longitud } = parada.coordenadas;
-    Linking.openURL(`https://www.openstreetmap.org/?mlat=${latitud}&mlon=${longitud}#map=18/${latitud}/${longitud}`);
-  };
+  const pendiente = estado === 'pendiente';
 
   return (
-    <Pantalla>
+    <Pantalla
+      pie={
+        pendiente ? (
+          <>
+            <Boton variante="acento" texto="Entregar y firmar" icono="create-outline" onPress={entregar} />
+            <Boton texto="No se pudo entregar" variante="peligro" icono="close-circle-outline" onPress={() => router.push({ pathname: '/chofer/no-entregada/[id]', params: { id: parada.id } })} />
+          </>
+        ) : undefined
+      }>
       <Stack.Screen options={{ title: `Parada ${parada.orden}` }} />
 
       {estado === 'entregada' && (
@@ -84,6 +79,18 @@ export default function DetalleParada() {
           etiqueta={`Mapa hasta ${parada.cliente.nombre}`}
         />
       </Seccion>
+
+      {pendiente && (
+        <View style={{ flexDirection: 'row', gap: 8 }}>
+          <Accion icono="navigate-outline" texto="Cómo llegar" onPress={() => comoLlegar(parada.coordenadas)} />
+          <Accion
+            icono="share-social-outline"
+            texto="Avisar"
+            onPress={() => compartir(mensajeAlCliente(parada.cliente.contacto, ruta.chofer, faltan))}
+          />
+          <Accion icono="call-outline" texto="Llamar" onPress={() => Linking.openURL(`tel:${parada.cliente.telefono.replace(/\s/g, '')}`)} />
+        </View>
+      )}
 
       <Tarjeta>
         <Dato icono="time-outline" titulo={estado === 'pendiente' ? `Llegada estimada ${horaCorta(llegada)}` : 'Franja del cliente'}>
@@ -116,35 +123,10 @@ export default function DetalleParada() {
         {!!parada.notas && <Notificacion tipo="info" titulo="Nota del cliente" mensaje={parada.notas} />}
       </Seccion>
 
-      <GrupoBotones>
-        {estado === 'pendiente' ? (
-          <>
-            <Boton variante="acento" texto="Entregar y firmar" icono="create-outline" onPress={entregar} />
-            <Boton texto="No se pudo entregar" variante="peligro" icono="close-circle-outline" onPress={() => setPreguntarMotivo(true)} />
-            <Boton
-              texto="Avisar al cliente"
-              variante="secundario"
-              icono="share-social-outline"
-              onPress={() => compartir(mensajeAlCliente(parada.cliente.contacto, ruta.chofer, faltan))}
-            />
-            <Boton texto="Cómo llegar" variante="texto" icono="navigate-outline" onPress={comoLlegar} />
-          </>
-        ) : (
-          <Boton texto="Deshacer y dejar pendiente" variante="texto" icono="arrow-undo-outline" onPress={() => jornada.deshacer(parada.id)} />
-        )}
-      </GrupoBotones>
+      {!pendiente && (
+        <Boton texto="Deshacer y dejar pendiente" variante="texto" icono="arrow-undo-outline" onPress={() => jornada.deshacer(parada.id)} />
+      )}
 
-      <Dialogo
-        visible={preguntarMotivo}
-        titulo="¿Qué pasó?"
-        mensaje="El cliente va a ver el motivo en el seguimiento de su pedido."
-        icono="alert"
-        onCerrar={() => setPreguntarMotivo(false)}
-        acciones={[
-          ...motivos.map((m) => ({ texto: m.texto, variante: 'secundario' as const, onPress: () => noEntregar(m.valor) })),
-          { texto: 'Cancelar', variante: 'texto' as const, onPress: () => setPreguntarMotivo(false) },
-        ]}
-      />
     </Pantalla>
   );
 }
@@ -158,5 +140,31 @@ function Dato({ icono, titulo, children }: { icono: 'time-outline' | 'person-out
         <Texto variante="chico">{children}</Texto>
       </View>
     </View>
+  );
+}
+
+// Acción rápida de la parada: botón cuadrado de 64 px, cómodo con guantes o con el celular en el soporte.
+function Accion({ icono, texto, onPress }: { icono: NombreIcono; texto: string; onPress: () => void }) {
+  const { colores } = useTema();
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={texto}
+      onPress={onPress}
+      style={({ pressed }) => ({
+        flex: 1,
+        minHeight: 64,
+        borderRadius: 16,
+        borderWidth: 1.5,
+        borderColor: colores.bordeControl,
+        backgroundColor: colores.superficie,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 4,
+        opacity: pressed ? 0.8 : 1,
+      })}>
+      <Icono nombre={icono} tamano={22} color="texto" />
+      <Texto variante="destacado">{texto}</Texto>
+    </Pressable>
   );
 }

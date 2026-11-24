@@ -13,7 +13,7 @@ type Guardada = { salida: string; entregas: Entregas };
 type Jornada = Guardada & {
   cargada: boolean;
   marcarEntregada: (paradaId: string, receptor: string) => void;
-  marcarNoEntregada: (paradaId: string, motivo: MotivoNoEntrega) => void;
+  marcarNoEntregada: (paradaId: string, motivo: MotivoNoEntrega, foto?: string) => void;
   deshacer: (paradaId: string) => void;
   reiniciar: () => void;
 };
@@ -66,10 +66,10 @@ export function ProveedorJornada({ children }: { children: ReactNode }) {
   );
 
   const marcarNoEntregada = useCallback(
-    (paradaId: string, motivo: MotivoNoEntrega) =>
+    (paradaId: string, motivo: MotivoNoEntrega, foto?: string) =>
       actualizar((j) => ({
         ...j,
-        entregas: { ...j.entregas, [paradaId]: { estado: 'no-entregada', hora: new Date().toISOString(), motivo } },
+        entregas: { ...j.entregas, [paradaId]: { estado: 'no-entregada', hora: new Date().toISOString(), motivo, foto } },
       })),
     [actualizar],
   );
