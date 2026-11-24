@@ -58,8 +58,8 @@ export const crearEstilos = (tema: Tema) => {
     },
     zoom: { position: 'absolute', right: espacio.s, top: espacio.s, gap: espacio.xs },
     botonZoom: {
-      width: 36,
-      height: 36,
+      width: 48,
+      height: 48,
       borderRadius: 18,
       backgroundColor: colores.superficie,
       alignItems: 'center',

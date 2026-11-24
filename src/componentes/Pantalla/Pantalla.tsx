@@ -13,9 +13,11 @@ type Props = {
   cabecera?: ReactNode;
   // Deslizar hacia abajo desde arriba de todo vuelve a pedir los datos.
   onRefrescar?: () => void;
+  // Acciones fijas abajo, fuera del scroll (la acción principal siempre a la vista).
+  pie?: ReactNode;
 };
 
-export function Pantalla({ children, conTabs = false, cabecera, onRefrescar }: Props) {
+export function Pantalla({ children, conTabs = false, cabecera, onRefrescar, pie }: Props) {
   const e = useEstilos(crearEstilos);
   const { colores } = useTema();
   const [refrescando, setRefrescando] = useState(false);
@@ -43,6 +45,7 @@ export function Pantalla({ children, conTabs = false, cabecera, onRefrescar }: P
           {children}
         </View>
       </ScrollView>
+      {pie && <View style={e.pie}>{pie}</View>}
     </KeyboardAvoidingView>
   );
 }

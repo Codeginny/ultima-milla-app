@@ -16,6 +16,8 @@ export type Colores = {
   textoSuave: string;
   titulo: string;
   borde: string;
+  // Borde de campos y casillas: 3:1 contra la superficie (WCAG 1.4.11).
+  bordeControl: string;
   enlace: string;
   foco: string;
   primario: string;
@@ -51,6 +53,7 @@ export const coloresClaros: Colores = {
   textoSuave: '#5b615d',
   titulo: marca.grafito,
   borde: '#d9dce0',
+  bordeControl: '#878e89',
   enlace: marca.limaProfunda,
   foco: '#9bc70e',
   primario: marca.grafito,
@@ -66,7 +69,7 @@ export const coloresClaros: Colores = {
   barra: marca.grafito,
   sobreBarra: '#a3aaa5',
   recorrido: marca.grafito,
-  recorridoHecho: '#9aa19c',
+  recorridoHecho: '#6b726d',
   veloMapa: 'rgba(242, 243, 245, 0.15)',
   velo: 'rgba(11, 13, 12, 0.6)',
   esqueleto: '#e1e4e7',
@@ -86,6 +89,7 @@ export const coloresOscuros: Colores = {
   textoSuave: '#9ba39d',
   titulo: marca.blanco,
   borde: '#272c28',
+  bordeControl: '#7a827c',
   enlace: marca.lima,
   foco: marca.lima,
   primario: marca.lima,
@@ -101,7 +105,7 @@ export const coloresOscuros: Colores = {
   barra: '#1d211e',
   sobreBarra: '#9ba39d',
   recorrido: marca.lima,
-  recorridoHecho: '#4a514c',
+  recorridoHecho: '#6a726c',
   veloMapa: 'rgba(7, 8, 7, 0.55)',
   velo: 'rgba(0, 0, 0, 0.7)',
   esqueleto: '#1d211e',

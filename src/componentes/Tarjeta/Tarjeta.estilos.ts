@@ -14,5 +14,6 @@ export const crearEstilos = (tema: Tema) =>
     },
     fila: { flexDirection: 'row', alignItems: 'center' },
     sinRelleno: { padding: 0, gap: 0, overflow: 'hidden' },
+    destacada: { borderWidth: 2, borderColor: tema.colores.titulo },
     presionada: { opacity: 0.9 },
   });

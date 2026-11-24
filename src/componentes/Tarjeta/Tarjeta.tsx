@@ -9,11 +9,13 @@ type Props = {
   enFila?: boolean;
   // Para listas de filas que ya traen su propio relleno.
   sinRelleno?: boolean;
+  // Borde marcado para lo que el usuario tiene que hacer ahora (por ejemplo, la próxima entrega).
+  destacada?: boolean;
   onPress?: () => void;
   etiquetaAccesible?: string;
 };
 
-export function Tarjeta({ children, enFila, sinRelleno, onPress, etiquetaAccesible }: Props) {
+export function Tarjeta({ children, enFila, sinRelleno, destacada, onPress, etiquetaAccesible }: Props) {
   const e = useEstilos(crearEstilos);
   if (onPress) {
     return (
@@ -21,10 +23,10 @@ export function Tarjeta({ children, enFila, sinRelleno, onPress, etiquetaAccesib
         accessibilityRole="button"
         accessibilityLabel={etiquetaAccesible}
         onPress={onPress}
-        style={({ pressed }) => [e.tarjeta, enFila && e.fila, sinRelleno && e.sinRelleno, pressed && e.presionada]}>
+        style={({ pressed }) => [e.tarjeta, enFila && e.fila, sinRelleno && e.sinRelleno, destacada && e.destacada, pressed && e.presionada]}>
         {children}
       </Pressable>
     );
   }
-  return <View style={[e.tarjeta, enFila && e.fila, sinRelleno && e.sinRelleno]}>{children}</View>;
+  return <View style={[e.tarjeta, enFila && e.fila, sinRelleno && e.sinRelleno, destacada && e.destacada]}>{children}</View>;
 }

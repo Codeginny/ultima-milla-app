@@ -10,7 +10,7 @@ export const crearEstilos = ({ colores }: Tema) =>
       minHeight: alturaControl,
       borderRadius: radio.campo,
       borderWidth: 1,
-      borderColor: colores.borde,
+      borderColor: colores.bordeControl,
       backgroundColor: colores.superficie,
       flexDirection: 'row',
       alignItems: 'center',

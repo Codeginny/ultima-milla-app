@@ -12,7 +12,7 @@ type PropsBarra = Parameters<NonNullable<ComponentProps<typeof Tabs>['tabBar']>>
 
 export type PestanaConfig = { titulo: string; etiqueta: string; icono: NombreIcono; iconoActivo: NombreIcono };
 
-// Barra flotante en forma de píldora: la pestaña activa se enciende en lima.
+// Barra flotante en forma de píldora: la pestaña activa se enciende en lima; todas llevan texto.
 export function BarraTabs({ state, navigation, pestanas }: PropsBarra & { pestanas: Record<string, PestanaConfig> }) {
   const e = useEstilos(crearEstilos);
   const haptica = useHaptica();
@@ -38,7 +38,7 @@ export function BarraTabs({ state, navigation, pestanas }: PropsBarra & { pestan
               onPress={ir}
               style={[e.pestana, activa && e.activa]}>
               <Icono nombre={activa ? p.iconoActivo : p.icono} tamano={20} color={activa ? 'sobreAcento' : 'sobreBarra'} />
-              {activa && <Text style={e.texto}>{p.etiqueta}</Text>}
+              <Text style={[e.texto, !activa && e.textoInactivo]}>{p.etiqueta}</Text>
             </Pressable>
           );
         })}

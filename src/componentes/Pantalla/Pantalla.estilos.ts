@@ -17,4 +17,16 @@ export const crearEstilos = ({ colores }: Tema) =>
     sinTabs: { paddingBottom: espacio.xxl },
     seccion: { gap: espacio.m },
     cabeceraSeccion: { gap: 2 },
+    pie: {
+      width: '100%',
+      maxWidth: 560,
+      alignSelf: 'center',
+      paddingHorizontal: espacio.l,
+      paddingTop: espacio.m,
+      paddingBottom: espacio.xl,
+      gap: espacio.s,
+      backgroundColor: colores.fondo,
+      borderTopWidth: 1,
+      borderTopColor: colores.borde,
+    },
   });

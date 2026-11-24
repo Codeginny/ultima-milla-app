@@ -24,9 +24,10 @@ export const crearEstilos = (tema: Tema) => {
       alignItems: 'center',
       justifyContent: 'center',
       gap: espacio.s,
-      paddingHorizontal: espacio.l,
+      paddingHorizontal: espacio.m,
     },
     activa: { backgroundColor: colores.acento },
     texto: { fontFamily: fuentes.negrita, fontSize: 14, color: colores.sobreAcento },
+    textoInactivo: { fontFamily: fuentes.media, color: colores.sobreBarra },
   });
 };
