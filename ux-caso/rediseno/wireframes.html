@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Wireframes Última Milla</title>
+<style>
+:root{--l:#1f2421;--m:#6b716d;--s:#c9cdc9;--f:#eef0ee;--acc:#1f2421}
+*{box-sizing:border-box;margin:0}
+body{font:14px/1.35 system-ui,sans-serif;background:#fff;color:var(--l);padding:40px;display:flex;gap:40px;flex-wrap:wrap;width:2200px}
+.w{width:390px}
+.n{font-weight:700;font-size:15px;margin-bottom:4px}.d{color:var(--m);font-size:12px;margin-bottom:10px;min-height:32px}
+.ph{width:390px;height:844px;border:2px solid var(--l);border-radius:36px;overflow:hidden;position:relative;background:#fff;display:flex;flex-direction:column}
+.top{height:56px;border-bottom:1.5px solid var(--s);display:flex;align-items:center;gap:10px;padding:0 16px;font-weight:700}
+.c{padding:14px 16px;display:flex;flex-direction:column;gap:12px;flex:1;overflow:hidden}
+.b{border:1.5px solid var(--s);border-radius:14px;padding:12px}
+.x{background:repeating-linear-gradient(45deg,var(--f) 0 10px,#fff 10px 20px);border:1.5px dashed var(--s);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--m);font-size:12px}
+.l{height:9px;border-radius:5px;background:var(--s)}.l.s{width:55%}.l.m{width:75%}
+.t{font-weight:700}.sm{font-size:12px;color:var(--m)}
+.btn{height:56px;border-radius:16px;border:2px solid var(--l);display:flex;align-items:center;justify-content:center;font-weight:700;gap:8px}
+.btn.p{background:var(--acc);color:#fff}.btn.g{border-style:dashed}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.chip{height:48px;border:1.5px solid var(--l);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;font-weight:600}
+.fix{padding:12px 16px 16px;border-top:1.5px solid var(--s);display:flex;flex-direction:column;gap:8px;background:#fff}
+.tabs{height:64px;border-top:1.5px solid var(--s);display:flex}.tabs div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;gap:4px;color:var(--m)}
+.tabs div::before{content:"";width:20px;height:20px;border:1.5px solid currentColor;border-radius:6px}
+.tabs .on{color:var(--l);font-weight:700}
+.step{display:flex;gap:10px;align-items:flex-start}.dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--l);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.dot.ok{background:var(--l);color:#fff}
+.prog{height:8px;border-radius:4px;background:var(--f);overflow:hidden}.prog i{display:block;height:100%;background:var(--l)}
+.ann{position:absolute;right:-2px;background:#f59e0b;color:#331a00;font-weight:800;border:3px solid #fff;border-radius:999px;min-width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:13px;padding:0 6px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.opt{height:48px;border:1.5px solid var(--s);border-radius:12px;display:flex;align-items:center;padding:0 12px;gap:10px}.opt.on{border:2px solid var(--l);font-weight:700}
+.opt::before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid currentColor}.opt.on::before{background:var(--l)}
+.sw{display:flex;justify-content:space-between;align-items:center}.sw i{width:46px;height:28px;border-radius:14px;background:var(--l);position:relative}.sw i::after{content:"";position:absolute;right:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff}
+</style></head><body>
+
+<div class="w"><div class="n">A · Ruta del chofer</div><div class="d">«Próxima entrega» deja de ser una alerta y trae sus dos acciones. Texto en todas las pestañas.</div>
+<div class="ph"><div class="top">Mi ruta de hoy</div><div class="c">
+ <div class="b"><div class="sm">2 de 7 paradas · 5 pendientes</div><div class="prog" style="margin-top:8px"><i style="width:28%"></i></div></div>
+ <div class="b" style="border:2px solid var(--l);position:relative"><span class="ann" style="top:-12px">5</span>
+  <div class="sm">PRÓXIMA ENTREGA · PARADA 3</div><div class="t" style="font-size:18px;margin:4px 0">Autoservicio El Puerto</div>
+  <div class="sm">Bv. Racedo 960 · llegás 12:19 (en 5 min) · recibe de 11:30 a 13:30</div>
+  <div class="row" style="margin-top:12px"><div class="btn">Ir</div><div class="btn p">Entregar</div></div></div>
+ <div class="x" style="height:190px;position:relative">Mapa · recorrido hecho con 3:1 de contraste<span class="ann" style="top:8px">7</span></div>
+ <div class="t">Paradas</div>
+ <div class="b"><div class="l m"></div><div class="l s" style="margin-top:6px"></div></div>
+ <div class="b"><div class="l m"></div><div class="l s" style="margin-top:6px"></div></div>
+ <div style="height:64px"></div>
+</div><div class="tabs" style="position:relative"><span class="ann" style="top:-14px">3</span><div class="on">Ruta</div><div>Resumen</div><div>Perfil</div></div></div></div>
+
+<div class="w"><div class="n">B · Parada</div><div class="d">Acciones en el orden del trabajo arriba y «Entregar y firmar» fijo abajo: no hace falta scrollear.</div>
+<div class="ph"><div class="top">← Parada 3</div><div class="c">
+ <div><div class="t" style="font-size:20px">Autoservicio El Puerto</div><div class="sm">Bv. Racedo 960 · Bajada Grande</div></div>
+ <div class="row" style="position:relative"><span class="ann" style="top:-14px">2</span><div class="chip">Cómo llegar</div><div class="chip">Avisar</div><div class="chip">Llamar</div></div>
+ <div class="b"><div class="t">Llegada 12:19 · en 5 min</div><div class="sm">Recibe Ramiro, de 11:30 a 13:30</div></div>
+ <div class="x" style="height:130px">Mapa chico</div>
+ <div class="b"><div class="t">Pedido BD-4103 · 11 bultos</div><div class="sm" style="margin-top:6px">Aceite 1,5 L × 24 · Fideos 500 g × 40 · Arroz 1 kg × 20</div></div>
+ <div class="b"><div class="t">Nota del cliente</div><div class="sm">Recibe Ramiro; pide remito firmado.</div></div>
+</div><div class="fix" style="position:relative"><span class="ann" style="top:-14px">1</span><div class="btn p">Entregar y firmar</div><div class="btn g">No se pudo entregar</div></div></div></div>
+
+<div class="w"><div class="n">C · Confirmar entrega</div><div class="d">Tres pasos con estado: el botón dice qué falta en vez de quedar apagado sin explicación. Campos con borde de 3:1.</div>
+<div class="ph"><div class="top">← Confirmar entrega</div><div class="c">
+ <div class="sm">PARADA 3 · PEDIDO BD-4103</div>
+ <div class="step"><div class="dot ok">✓</div><div style="flex:1"><div class="t">Quién recibe</div><div class="b" style="border:2px solid var(--m);margin-top:6px;position:relative">Ramiro<span class="ann" style="top:-12px">8</span></div></div></div>
+ <div class="step"><div class="dot ok">✓</div><div style="flex:1"><div class="t">Bultos</div><div class="sm">Se entregaron los 11 bultos</div></div></div>
+ <div class="step"><div class="dot">3</div><div style="flex:1"><div class="t">Firma</div><div class="x" style="height:200px;margin-top:6px">Firmá con el dedo</div></div></div>
+</div><div class="fix" style="position:relative"><span class="ann" style="top:-14px">9</span><div class="sm" style="text-align:center">Paso 3 de 3: falta la firma</div><div class="btn g">Confirmar entrega</div></div></div></div>
+
+<div class="w"><div class="n">D · No se pudo entregar</div><div class="d">Motivo en un toque y foto opcional como evidencia, como hoy hacen por WhatsApp.</div>
+<div class="ph"><div class="top">← No se pudo entregar</div><div class="c">
+ <div class="t">¿Qué pasó?</div>
+ <div class="opt on">Comercio cerrado</div><div class="opt">No había quien reciba</div><div class="opt">Rechazó el pedido</div><div class="opt">Dirección incorrecta</div><div class="opt">Otro motivo</div>
+ <div class="t" style="position:relative">Foto (opcional)<span class="ann" style="top:-6px">10</span></div>
+ <div class="x" style="height:120px">Sacar foto de la persiana o del local</div>
+</div><div class="fix"><div class="btn p">Registrar y seguir</div></div></div></div>
+
+<div class="w"><div class="n">E · Mi pedido (comercio)</div><div class="d">El aviso 10 minutos antes viene activado y se ve arriba del mapa.</div>
+<div class="ph"><div class="top">Mi pedido</div><div class="c">
+ <div class="b"><div class="sm">PEDIDO BD-4105</div><div class="t" style="font-size:24px">Llega en 23 min</div><div class="sm">A las 12:37 · antes hay 1 entrega</div>
+  <div class="row" style="margin-top:10px;font-size:11px;color:var(--m)"><div>● Preparado</div><div style="color:var(--l);font-weight:700">● En camino</div><div>○ Cerca</div><div>○ Entregado</div></div></div>
+ <div class="b sw" style="position:relative"><span class="ann" style="top:-12px">11</span><div><div class="t">Aviso 10 minutos antes</div><div class="sm">Activado · te avisamos cuando el camión esté cerca</div></div><i></i></div>
+ <div class="x" style="height:220px">Mapa con el camión y el camino hasta tu puerta</div>
+ <div class="b"><div class="t">Tu pedido · 5 bultos</div><div class="l m" style="margin-top:8px"></div></div>
+</div><div class="tabs"><div class="on">Mi pedido</div><div>Historial</div><div>Perfil</div></div></div></div>
+
+</body></html>
