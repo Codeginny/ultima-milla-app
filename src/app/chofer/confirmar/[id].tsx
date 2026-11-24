@@ -15,7 +15,7 @@ import { useJornada } from '@/hooks/useJornada';
 import { useRuta } from '@/hooks/useRuta';
 import { useTema } from '@/tema';
 
-// Comprobante de entrega: quién recibe, control de bultos y firma. Sin los tres, no se puede confirmar.
+// Comprobante de entrega en 3 pasos: quién recibe, control de bultos y firma. El pie fijo dice cuál falta.
 export default function ConfirmarEntrega() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { datos: ruta } = useRuta();
@@ -37,7 +37,12 @@ export default function ConfirmarEntrega() {
     );
   }
 
-  const listo = receptor.trim().length > 1 && bultosOk && firmada;
+  const pasos = [receptor.trim().length > 1, bultosOk, firmada];
+  const hechos = pasos.filter(Boolean).length;
+  const listo = hechos === pasos.length;
+  const falta = [pasos[0] ? null : 'el nombre', pasos[1] ? null : 'el control de bultos', pasos[2] ? null : 'la firma'].filter(Boolean).join(', ');
+  const titulo = (n: number, texto: string) => `${pasos[n - 1] ? '✓' : `${n}.`} ${texto}`;
+
   const confirmar = () => {
     marcarEntregada(parada.id, receptor.trim());
     haptica.exito();
@@ -45,7 +50,15 @@ export default function ConfirmarEntrega() {
   };
 
   return (
-    <Pantalla>
+    <Pantalla
+      pie={
+        <>
+          <Texto variante="chico" centrado>
+            {listo ? 'Todo listo: confirmá la entrega.' : `Paso ${hechos} de 3 · falta ${falta}.`}
+          </Texto>
+          <Boton variante="acento" texto="Confirmar entrega" icono="checkmark-circle" deshabilitado={!listo} onPress={confirmar} />
+        </>
+      }>
       <Tarjeta>
         <Texto variante="etiqueta">
           Parada {parada.orden} · Pedido {parada.pedido.codigo}
@@ -54,11 +67,11 @@ export default function ConfirmarEntrega() {
         <Texto variante="chico">{parada.direccion}</Texto>
       </Tarjeta>
 
-      <Seccion titulo="1. Quién recibe">
+      <Seccion titulo={titulo(1, 'Quién recibe')}>
         <CampoTexto etiqueta="Nombre" valor={receptor} onCambiar={setReceptor} placeholder="Nombre de quien recibe" />
       </Seccion>
 
-      <Seccion titulo="2. Control de bultos">
+      <Seccion titulo={titulo(2, 'Control de bultos')}>
         <Pressable
           accessibilityRole="checkbox"
           accessibilityState={{ checked: bultosOk }}
@@ -73,7 +86,7 @@ export default function ConfirmarEntrega() {
                 height: 28,
                 borderRadius: 9,
                 borderWidth: 2,
-                borderColor: bultosOk ? colores.acento : colores.borde,
+                borderColor: bultosOk ? colores.acento : colores.bordeControl,
                 backgroundColor: bultosOk ? colores.acento : 'transparent',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -88,16 +101,9 @@ export default function ConfirmarEntrega() {
         </Pressable>
       </Seccion>
 
-      <Seccion titulo="3. Firma" descripcion="Pedile a quien recibe que firme en el recuadro.">
+      <Seccion titulo={titulo(3, 'Firma')} descripcion="Pedile a quien recibe que firme en el recuadro.">
         <FirmaPad onCambiar={setFirmada} />
       </Seccion>
-
-      <Boton variante="acento" texto="Confirmar entrega" icono="checkmark-circle" deshabilitado={!listo} onPress={confirmar} />
-      {!listo && (
-        <Texto variante="chico" centrado>
-          Falta {[receptor.trim().length > 1 ? null : 'el nombre', bultosOk ? null : 'el control de bultos', firmada ? null : 'la firma'].filter(Boolean).join(', ')}.
-        </Texto>
-      )}
     </Pantalla>
   );
 }
