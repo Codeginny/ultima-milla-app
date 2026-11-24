@@ -1,0 +1,16 @@
+{
+  "nombre": "Última Milla",
+  "proyecto": "~/Projects/ultima-milla-app",
+  "referencia": "Volt + Kept",
+  "concepto": "Un arco de ruta que termina en un punto: el último tramo hasta la puerta del cliente. Lima neón sobre grafito, como una señal de 'listo para salir'.",
+  "tipografia": "Space Grotesk",
+  "paleta": {
+    "base": "#0B0D0C",
+    "superficie": "#151816",
+    "acento": "#C6F432",
+    "acento-profundo": "#5E7D00",
+    "texto": "#F4F7EE",
+    "claro": "#F2F3F5",
+    "alerta": "#FF5C39"
+  }
+}
