@@ -1,10 +1,10 @@
 // Saca las capturas del README recorriendo la app en Expo Web con Playwright.
-// Uso: con `npm run web` levantado, `node scripts/capturas.mjs` (BASE_URL cambia el puerto).
+// Uso: con `npm run web` levantado, `node scripts/capturas.mjs` (BASE_URL cambia el puerto; SALIDA, la carpeta).
 import { chromium } from 'playwright';
 import { mkdir } from 'node:fs/promises';
 
 const BASE = process.env.BASE_URL ?? 'http://localhost:8081';
-const SALIDA = new URL('../docs/capturas/', import.meta.url).pathname;
+const SALIDA = process.env.SALIDA ?? new URL('../docs/capturas/', import.meta.url).pathname;
 const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function nuevaPagina(navegador, esquema) {
@@ -84,7 +84,9 @@ for (const esquema of ['light', 'dark']) {
   await esperar(1500);
   await foto(p, `10-cliente-pedido${sufijo}`);
   if (esquema === 'light') {
-    await p.getByRole('button', { name: /Avisarme 10 minutos antes/ }).click();
+    // El aviso viene activado; si alguien lo quitó, se vuelve a activar para la captura.
+    const avisar = p.getByRole('button', { name: /Avisarme 10 minutos antes/ });
+    if (await avisar.count()) await avisar.click();
     await foto(p, '11-cliente-pedido-completo', true);
     await ir(p, '/cliente/pedidos');
     await foto(p, '12-cliente-historial');
