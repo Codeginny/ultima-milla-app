@@ -159,4 +159,6 @@ npx eas-cli build -p android --profile preview
 
 ## Licencia
 
-MIT.
+© 2026 Virginia Ponce. Todos los derechos reservados.
+
+Este repositorio es público sólo para mostrar mi trabajo como portfolio y para evaluación técnica. No se otorga permiso para copiar, modificar, distribuir ni usar este código, total o parcialmente, sin mi autorización por escrito.
